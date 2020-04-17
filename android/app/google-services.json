@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "878927867826",
+    "firebase_url": "https://hello-world-flutter-a4d77.firebaseio.com",
+    "project_id": "hello-world-flutter-a4d77",
+    "storage_bucket": "hello-world-flutter-a4d77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878927867826:android:60be76ce32719f72ebbeab",
+        "android_client_info": {
+          "package_name": "com.example.hello_world"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878927867826-4a5k5taab8t09eejuft4pokn0610dhvt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBGussFFI8D0zfCnu1moqjfSxZaYlC9uE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878927867826-4a5k5taab8t09eejuft4pokn0610dhvt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
