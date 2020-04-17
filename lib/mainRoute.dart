@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'globalVars.dart' as globals;
 import 'dart:async';
+import 'package:jiffy/jiffy.dart';
 
 class MainRoute extends StatefulWidget {
   @override
@@ -33,12 +34,16 @@ class _MainRouteState extends State<MainRoute> {
   static var critical = 0;
   static var deaths = 0;
   static final time = const Duration(seconds: 900);
+  static var lastUpdate;
+  static var lastUpdateRelative;
 
   @override
   void initState() {
     super.initState();
     getTotal();
     new Timer.periodic(time, (Timer t) => getTotal());
+    new Timer.periodic(
+        const Duration(seconds: 1), (Timer t) => updateRelativeTime());
   }
 
   @override
@@ -60,6 +65,11 @@ class _MainRouteState extends State<MainRoute> {
                     'Live Covid-19 statistics',
                     style: new TextStyle(fontSize: 30),
                   ),
+                  Padding(padding: const EdgeInsets.all(40.0)),
+                  Text(
+                    'Updated $lastUpdateRelative (automatically update every 15 minutes)',
+                    style: new TextStyle(fontSize: 30),
+                  ),
                 ]),
             SizedBox(
               width: 800, // hard coding child width
@@ -67,12 +77,21 @@ class _MainRouteState extends State<MainRoute> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Padding(padding: const EdgeInsets.all(80.0)),
+                  Padding(padding: const EdgeInsets.all(30.0)),
                   textField('confirmed', confirmed),
                   textField('recovered', recovered),
                   textField('critical', critical),
                   textField('deaths', deaths),
                 ],
+              ),
+            ),
+            Padding(padding: const EdgeInsets.all(30.0)),
+            ButtonTheme(
+              minWidth: 120.0,
+              height: 60.0,
+              child: RaisedButton(
+                onPressed: () => getTotal(),
+                child: Text('UPDATE'),
               ),
             ),
             Padding(padding: const EdgeInsets.all(30.0)),
@@ -103,6 +122,13 @@ class _MainRouteState extends State<MainRoute> {
       critical = int.parse(totals['critical']);
       deaths = int.parse(totals['deaths']);
     });
+    lastUpdate = Jiffy(DateTime.now());
     print('Data updated!');
+  }
+
+  updateRelativeTime() {
+    setState(() {
+      lastUpdateRelative = lastUpdate.fromNow();
+    });
   }
 }

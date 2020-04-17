@@ -26,6 +26,7 @@ dependencies:
   cloud_firestore: ^0.13.5
   http: ^0.12.0+4
   intl: ">=0.14.0"
+  jiffy: ^3.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
